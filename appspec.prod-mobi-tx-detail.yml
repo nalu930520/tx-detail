@@ -1,0 +1,40 @@
+version: 0.0
+os: linux
+files:
+  - source: /dist
+    destination: /data/mobi-tx-detail-jenkins/dist
+  - source: /ansible
+    destination: /data/mobi-tx-detail-jenkins/ansible
+  - source: /appspec.prod-mobi-tx-detail.yml
+    destination: /data/mobi-tx-detail-jenkins/
+permissions:
+  - object: /data/mobi-tx-detail-jenkins
+    pattern: "dist"
+    owner: nginx
+    group: root
+    mode: 554
+    type:
+      - directory
+  - object: /data/mobi-tx-detail-jenkins/dist
+    pattern: "**"
+    owner: nginx
+    group: root
+    mode: 664
+    type:
+      - file
+  - object: /data/mobi-tx-detail-jenkins/ansible/scripts
+    pattern: "**"
+    owner: nginx
+    group: root
+    mode: 755
+    type:
+      - file
+hooks:
+  #   BeforeInstall:
+  #       - location: ansible/scripts/before_install_jenkins.sh
+  #         timeout: 3600
+  #         runas: root
+   AfterInstall:
+       - location: ansible/scripts/after_install_jenkins.sh
+         timeout: 3600
+         runas: root

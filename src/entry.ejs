@@ -1,0 +1,35 @@
+<% htmlWebpackPlugin.options.headScripts = htmlWebpackPlugin.options.headScripts || [] %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+  <script>
+    (function(a, d) {
+      return;
+      var b = a.documentElement,
+        e = "orientationchange" in window ? "orientationchange" : "resize",
+        c = function() {
+          var a = b.clientWidth;
+          a && (b.style.fontSize = Math.min(a, 750) / 375 * 100 + "px")
+        };
+      a.addEventListener && (d.addEventListener(e, c, !1), a.addEventListener("DOMContentLoaded", c, !1))
+    })(document, window);
+  </script>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
+  <title>Mobi Card</title>
+  <!--[if lte IE 10]>
+      <script
+        src="https://as.alipayobjects.com/g/component/??console-polyfill/0.2.2/index.js,media-match/2.0.2/media.match.min.js"></script>
+  <![endif]-->
+  <% for (item of htmlWebpackPlugin.options.headScripts) { %>
+    <script src="<%= item %>"></script>
+  <% } %>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+version: 0.0
+os: linux
+files:
+  - source: /dist
+    destination: /data/mobi-tx-detail/dist
+  - source: /ansible
+    destination: /data/mobi-tx-detail/ansible
+  - source: /appspec.yml
+    destination: /data/mobi-tx-detail/
+permissions:
+  - object: /data
+    pattern: "mobi-tx-detail"
+    owner: nginx
+    group: root
+    mode: 554
+    type:
+      - directory
+  - object: /data/mobi-tx-detail
+    pattern: "dist"
+    owner: nginx
+    group: root
+    mode: 554
+    type:
+      - directory
+  - object: /data/mobi-tx-detail/dist
+    pattern: "**"
+    owner: nginx
+    group: root
+    mode: 664
+    type:
+      - file
+  - object: /data/mobi-tx-detail/ansible/scripts
+    pattern: "**"
+    owner: nginx
+    group: root
+    mode: 755
+    type:
+      - file
+hooks:
+   AfterInstall:
+       - location: ansible/scripts/after_install.sh 
+         timeout: 3600
+   

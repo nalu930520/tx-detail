@@ -1,0 +1,3 @@
+[submodule "src/mobi-app-localization"]
+	path = src/mobi-app-localization
+	url = git@github.com:mobiwallet/mobi-app-localization.git
